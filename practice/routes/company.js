@@ -70,4 +70,31 @@ router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
   }
 });
 
+// 회사 팔로우 유무 업데이트
+router.put("/following/:company_idx/:company_follow", async (req, res) => {
+  const { company_idx, company_follow } = req.params;
+
+  try {
+    const followingUpdateResult = await companyModel.changeCompanyFollowing(
+      company_idx,
+      company_follow
+    );
+
+    return res
+      .status(statusCode.OK)
+      .send(
+        util.success(
+          statusCode.OK,
+          "회사 팔로우 유무 업데이트 성공 (1이면 팔로우, 0이면 언팔로우)",
+          followingUpdateResult
+        )
+      );
+  } catch (err) {
+    return res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, err.message));
+    throw err;
+  }
+});
+
 module.exports = router;

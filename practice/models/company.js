@@ -30,7 +30,18 @@ const company = {
   },
   changeCompanyHearts: async (company_idx, company_hearts) => {
     const query = `UPDATE ${table} SET company_hearts="${company_hearts}" WHERE company_idx="${company_idx}";`;
-    const query2 = `SELECT company_name, company_hearts FROM ${table};`;
+    const query2 = `SELECT company_name, company_hearts FROM ${table} WHERE company_idx="${company_idx}";`;
+    try {
+      const result = await pool.queryParam(query2);
+      return result;
+    } catch (err) {
+      console.log("회사 하트개수 업데이트 실패", err.errno, err.code);
+      throw err;
+    }
+  },
+  changeCompanyFollowing: async (company_idx, company_follow) => {
+    const query = `UPDATE ${table} SET company_hearts="${company_follow}" WHERE company_idx="${company_idx}";`;
+    const query2 = `SELECT company_name, company_hearts FROM ${table} WHERE company_idx="${company_idx}";`;
     try {
       const result = await pool.queryParam(query2);
       return result;
