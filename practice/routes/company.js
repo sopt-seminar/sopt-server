@@ -44,12 +44,12 @@ router.get("/interested/:uid", async (req, res) => {
 });
 
 // 회사 하트 개수 수정
-router.put("/hearts/:company_name/:company_hearts", async (req, res) => {
-  const { company_name, company_hearts } = req.params;
+router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
+  const { company_idx, company_hearts } = req.params;
 
   try {
     const heartsUpdateResult = await companyModel.changeCompanyHearts(
-      company_name,
+      company_idx,
       company_hearts
     );
 

@@ -28,8 +28,8 @@ const company = {
     console.log("인기 회사 조회가 실패했습니다.", err);
     throw err;
   },
-  changeCompanyHearts: async (company_name, company_hearts) => {
-    const query = `UPDATE ${table} SET company_hearts="${company_hearts}" WHERE company_name="${company_name}"`;
+  changeCompanyHearts: async (company_idx, company_hearts) => {
+    const query = `UPDATE ${table} SET company_hearts="${company_hearts}" WHERE company_idx="${company_idx}"`;
     try {
       const result = await pool.queryParam(query);
       return {
@@ -38,7 +38,7 @@ const company = {
       };
     } catch (err) {
       console.log("회사 하트개수 업데이트 실패", err.errno, err.code);
-      throw err;
+      return -1;
     }
   },
 };
