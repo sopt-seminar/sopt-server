@@ -65,7 +65,7 @@ router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
   } catch (err) {
     return res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, err.message));
+      .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, "test"));
     throw err;
   }
 });
