@@ -47,6 +47,13 @@ router.get("/interested/:uid", async (req, res) => {
 router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
   const { company_idx, company_hearts } = req.params;
 
+  if (!company_idx || !company_hearts) {
+    res
+      .status(statusCode.BAD_REQUEST)
+      .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
+    return;
+  }
+
   try {
     const heartsUpdateResult = await companyModel.changeCompanyHearts(
       company_idx,
@@ -74,6 +81,13 @@ router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
 router.put("/following/:company_idx/:company_follow", async (req, res) => {
   const { company_idx, company_follow } = req.params;
 
+  if (!company_idx || !company_follow) {
+    res
+      .status(statusCode.BAD_REQUEST)
+      .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
+    return;
+  }
+
   try {
     const followingUpdateResult = await companyModel.changeCompanyFollowing(
       company_idx,
@@ -85,7 +99,7 @@ router.put("/following/:company_idx/:company_follow", async (req, res) => {
       .send(
         util.success(
           statusCode.OK,
-          "회사 팔로우 유무 업데이트 성공 (1이면 팔로우, 0이면 언팔로우)",
+          "회사 팔로우 유무 업데이트 성공 (1이면 팔로우한 상태, 0이면 언팔로우 상태)",
           followingUpdateResult
         )
       );
