@@ -32,6 +32,7 @@ const company = {
     const query = `UPDATE ${table} SET company_hearts="${company_hearts}" WHERE company_idx="${company_idx}";`;
     const query2 = `SELECT company_name, company_hearts FROM ${table} WHERE company_idx="${company_idx}";`;
     try {
+      await pool.queryParam(query);
       const result = await pool.queryParam(query2);
       return result;
     } catch (err) {
@@ -43,6 +44,7 @@ const company = {
     const query = `UPDATE ${table} SET company_follow="${company_follow}" WHERE company_idx="${company_idx}";`;
     const query2 = `SELECT company_name, company_follow FROM ${table} WHERE company_idx="${company_idx}";`;
     try {
+      await pool.queryParam(query);
       const result = await pool.queryParam(query2);
       return result;
     } catch (err) {
