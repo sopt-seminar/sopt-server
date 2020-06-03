@@ -3,7 +3,7 @@ const table = "company";
 
 const company = {
   popularCompany: async (uid) => {
-    const query = `SELECT company_name, company_industry, company_img, company_hearts FROM ${table};`;
+    const query = `SELECT company_name, company_industry, company_img, company_hearts,carousel_view_title FROM ${table};`;
 
     try {
       const result = await pool.queryParam(query);
@@ -16,7 +16,7 @@ const company = {
     throw err;
   },
   interestedCompany: async (uid) => {
-    const query = `SELECT company_img, company_follow, company_name, company_location, recruit_position FROM ${table};`;
+    const query = `SELECT company_img, company_follow, company_name, company_location, recruit_position, carousel_view_title FROM ${table};`;
 
     try {
       const result = await pool.queryParam(query);

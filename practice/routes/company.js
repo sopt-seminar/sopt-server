@@ -65,14 +65,19 @@ router.put("/hearts/:company_idx/:company_hearts", async (req, res) => {
       .send(
         util.success(
           statusCode.OK,
-          "회사 하트개수 업데이트 성공",
+          "회사 좋아요 개수 업데이트 성공",
           heartsUpdateResult
         )
       );
   } catch (err) {
     return res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, "test"));
+      .send(
+        util.fail(
+          statusCode.INTERNAL_SERVER_ERROR,
+          "회사 좋아요 개수 업데이트 실패"
+        )
+      );
     throw err;
   }
 });
@@ -106,7 +111,9 @@ router.put("/following/:company_idx/:company_follow", async (req, res) => {
   } catch (err) {
     return res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, err.message));
+      .send(
+        util.fail(statusCode.INTERNAL_SERVER_ERROR, "팔로우 정보 업데이트 실패")
+      );
     throw err;
   }
 });
